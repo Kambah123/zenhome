@@ -451,18 +451,7 @@
                     </div>
                 </div>
                 <div class="row g-5" style="margin-top: 4rem;">
-                    <div class="col-md-4">
-                        <div class="card wow animate__animated animate__fadeInUp">
-                            <div class="card_body">
-                                <div class="heading_3" style="font-size: 3.6rem; margin-bottom: 1.5rem;">Founder</div>
-                                <p style="font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem; color: var(--primaryText);">[Founder Name]</p>
-                                <p style="font-size: 1.4rem; line-height: 1.8;">
-                                    [Founder bio placeholder - Replace with actual founder information. Include background, experience, and passion for residential drafting services.]
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card wow animate__animated animate__fadeInUp animate__delay-1s">
                             <div class="card_body">
                                 <div class="heading_3" style="font-size: 3.6rem; margin-bottom: 1.5rem;">Expert Services</div>
@@ -477,7 +466,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card wow animate__animated animate__fadeInUp animate__delay-2s">
                             <div class="card_body">
                                 <div class="heading_3" style="font-size: 3.6rem; margin-bottom: 1.5rem;">How to Book</div>
@@ -564,7 +553,7 @@
                     </p>
                 </div>
                 <div style="max-width: 600px; margin: 4rem auto 0;">
-                    <form class="wow animate__animated animate__fadeInUp" id="quoteForm" style="display: flex; flex-direction: column; gap: 2rem;" onsubmit="handleQuoteSubmit(event)">
+                    <form class="wow animate__animated animate__fadeInUp" id="contact-form" style="display: flex; flex-direction: column; gap: 2rem;">
                         <input type="text" name="name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Your Email" required>
                         <input type="tel" name="phone" placeholder="Phone Number">
@@ -579,6 +568,7 @@
                         </select>
                         <textarea name="message" placeholder="Tell us about your project" rows="5" style="resize: vertical;"></textarea>
                         <button type="submit" class="btn_1" style="align-self: center;">Submit Quote Request</button>
+                        <div id="form-messages" style="text-align: center; margin-top: 1rem; font-size: 1.4rem;"></div>
                     </form>
                 </div>
             </div>
@@ -740,22 +730,44 @@
         document.addEventListener('DOMContentLoaded', initComparisonSliders);
 
         // Quote Form Submission Handler
-        function handleQuoteSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
-            // Create mailto link with form data
-            const subject = encodeURIComponent(`Quote Request - ${data.service || 'General Inquiry'}`);
-            const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || 'Not provided'}\nService: ${data.service}\n\nMessage:\n${data.message || 'No message provided'}`);
-            const mailtoLink = `mailto:enquiries@zendrafting.com.au?subject=${subject}&body=${body}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Optional: Show success message
-            alert('Thank you for your quote request! Your email client should open shortly.');
+        const contactForm = document.getElementById('contact-form');
+        const formMessages = document.getElementById('form-messages');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                formMessages.textContent = 'Sending...';
+                formMessages.style.color = 'var(--primaryText)';
+
+                const formData = new FormData(contactForm);
+                const payload = Object.fromEntries(formData);
+
+                try {
+                    const response = await fetch('/api/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        formMessages.textContent = 'Thank you! Your request has been sent.';
+                        formMessages.style.color = 'green';
+                        contactForm.reset(); // Clear the form
+                    } else {
+                        formMessages.textContent = `Error: ${result.error || 'Something went wrong.'}`;
+                        formMessages.style.color = 'red';
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    formMessages.textContent = 'An unexpected error occurred. Please try again later.';
+                    formMessages.style.color = 'red';
+                }
+            });
         }
     </script>
 </body>
