@@ -103,7 +103,7 @@ a {
 }
 
 .btn_secondary {
-    background: transparent;
+    background: #fff;
     border: 1px solid var(--primaryText);
     color: var(--primaryText);
 }
@@ -121,6 +121,12 @@ a {
 
 .btn_dark:hover {
     background: #000;
+}
+
+.btn_hero {
+    background: #fff;
+    color: var(--primaryText);
+    border: 1px solid #fff;
 }
 
 .btn_2 {
