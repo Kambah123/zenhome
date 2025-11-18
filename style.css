@@ -1077,3 +1077,15 @@ footer small {
     margin-bottom: 4rem;
     text-align: center;
 }
+
+.social-icon {
+    width: 2.5rem; /* Adjust size as needed */
+    height: 2.5rem; /* Adjust size as needed */
+    object-fit: contain;
+    filter: sepia(100%) hue-rotate(30deg) saturate(500%) brightness(70%); /* Approximate #E8C547 */
+    transition: filter 0.3s ease;
+}
+
+.social-icon:hover {
+    filter: brightness(0) invert(1); /* Makes it white */
+}
