@@ -246,89 +246,12 @@ main p {
   color: var(--mutedText);
 }
 
-.intro {
-  background-image: url('images/1.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: auto;
+/* Page */
+main {
   width: 100vw;
-  position: relative;
-  padding: 10rem 0;
-}
-
-.intro::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.intro .heading_1, .intro .heading_2, .intro p {
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-
-
-.intro .heading_1 {
-  position: relative;
-  margin-top: 0;
-  z-index: 2;
-}
-
-.intro p {
-  position: relative;
-  margin-top: 4rem;
-  z-index: 2;
-  width: 38ch;
-  max-width: 100%;
-}
-
-.projects {
+  height: fit-content;
   display: flex;
-  gap: 4rem;
-  margin-top: 4rem;
-}
-
-.projects .project {
-  height: 18rem;
-  width: 15rem;
-  overflow: hidden;
-  border-radius: 1rem;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-}
-
-.projects .project img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  transition: 0.3s ease;
-}
-
-.projects .project:hover img {
-  transform: rotate(-5deg) scale(1.5);
-}
-
-.intro .btn_2 {
-  position: relative;
-  z-index: 2;
-  margin-block: 6rem;
-  color: #fff;
-}
-
-.intro .btn_2::after {
-    background-image: url("circle-arrow.png");
-}
-
-section {
-  background: var(--background);
-  padding-block: 10rem;
-  padding-left: 4%;
-  padding-right: 4%;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 576px) {
