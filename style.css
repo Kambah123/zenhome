@@ -246,37 +246,29 @@ main p {
   color: var(--mutedText);
 }
 
-.hero {
-  position: relative;
+.intro {
+  background-image: url('images/1.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: auto;
   width: 100vw;
-  height: 100vh; /* Adjust as needed */
-  overflow: hidden;
+  position: relative;
+  padding: 10rem 0;
 }
 
-.hero-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #fff;
-  padding: 10rem 0; /* Adjust padding as needed */
-}
-
-.hero .heading_1, .hero .heading_2, .hero p {
+.intro .heading_1, .intro .heading_2, .intro p {
     color: #fff;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-.hero .heading_1 {
+
+.intro .heading_1 {
   position: relative;
   margin-top: 0;
   z-index: 2;
 }
 
-.hero p {
+.intro p {
   position: relative;
   margin-top: 4rem;
   z-index: 2;
